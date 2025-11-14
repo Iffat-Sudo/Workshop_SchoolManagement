@@ -3,6 +3,7 @@ package se.lexicon.model;
 import java.time.LocalDate;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Objects;
 
 public class Course {
     private static int sequencer = 0;
@@ -57,10 +58,25 @@ public class Course {
     }
 
     public void register(Student student) {
+        if (students.contains(student)){
+            throw new IllegalArgumentException("Student already registered");
+        }
         students.add(student);
 
     }
     public void unregister(Student student) {
         students.remove(student);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        Course course = (Course) o;
+        return id == course.id && weekDuration == course.weekDuration && Objects.equals(courseName, course.courseName) && Objects.equals(startDate, course.startDate) && Objects.equals(students, course.students);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, courseName, startDate, weekDuration, students);
     }
 }
