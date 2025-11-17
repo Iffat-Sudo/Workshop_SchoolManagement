@@ -12,7 +12,8 @@ public class StudentDaoImpl implements StudentDao {
     public Student save(Student student) {
         if (students.contains(student)) {
             throw new RuntimeException("Student already added");
-        } else if (student == null) {
+        }
+        else if (student == null) {
             throw new IllegalArgumentException("Student is null");
         }
         students.add(student);
@@ -33,7 +34,7 @@ public class StudentDaoImpl implements StudentDao {
     public List<Student> findByName(String name) {
         List<Student> studentFound = new LinkedList<>();
         for (Student student : students) {
-            if (student.getEmail().equalsIgnoreCase(name)) {
+            if (student.getName().equalsIgnoreCase(name)) {
                 studentFound.add(student);
             }
         }
@@ -62,6 +63,9 @@ public class StudentDaoImpl implements StudentDao {
 
     @Override
     public boolean delete(Student student) {
+        if(student==null){
+            throw new IllegalArgumentException("The student is null");
+        }
 
         return students.remove(student);
     }

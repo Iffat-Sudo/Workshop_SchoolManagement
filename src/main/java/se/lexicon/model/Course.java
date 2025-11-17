@@ -59,13 +59,25 @@ public class Course {
 
     public void register(Student student) {
         if (students.contains(student)){
-            throw new IllegalArgumentException("Student already registered");
+            throw new IllegalArgumentException("Student already registered for this course");
+        }
+        else if(student == null){
+            throw new IllegalArgumentException("The Student is null or empty");
         }
         students.add(student);
 
     }
     public void unregister(Student student) {
-        students.remove(student);
+        if(students.contains(student)) {
+            students.remove(student);
+        }
+        else if(student==null){
+            throw new IllegalArgumentException("The Student is null or empty");
+        }
+        else {
+
+            throw new RuntimeException("The Student was not registered!");
+        }
     }
 
     @Override
@@ -78,5 +90,15 @@ public class Course {
     @Override
     public int hashCode() {
         return Objects.hash(id, courseName, startDate, weekDuration, students);
+    }
+    @Override
+    public String toString() {
+        return "Course{" +
+                "id=" + id +
+                ", courseName='" + courseName + '\'' +
+                ", startDate=" + startDate +
+                ", weekDuration=" + weekDuration +
+                ", students=" + students +
+                '}';
     }
 }
