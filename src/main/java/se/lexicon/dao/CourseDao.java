@@ -8,7 +8,7 @@ import java.util.List;
 public interface CourseDao {
 
     Course save(Course course);
-    Course FindById(int id);
+    Course findById(int id);
     List<Course> findByName(String name);
     List<Course> findByDate(LocalDate date);
     List<Course> findAll();
